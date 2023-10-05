@@ -10,6 +10,11 @@ import router from './router'; // or './router/index.js' if you placed it there
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+//Quill WYSIWYG editor to make things spicy
+import 'quill/dist/quill.core.css';
+import 'quill/dist/quill.snow.css'; // for Snow theme
+
+
 Vue.config.productionTip = false
 
 // Make BootstrapVue available throughout your project

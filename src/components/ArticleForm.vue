@@ -56,13 +56,15 @@
             <b-form-datepicker v-model="form.date" required></b-form-datepicker>
           </b-form-group>
 
-          <!-- Content (Using a simple textarea for demonstration. Consider integrating a WYSIWYG editor like CKEditor or Quill for a richer experience) -->
+          <!-- Content used Quill, thanks Sir Lester, so they call it WYSIWYG huh, swapped out form.content with content from Quill/v-model) -->
           <b-form-group
             label="Content"
-            :state="!!form.content"
+            :state="!!content"
             invalid-feedback="Content is required"
           >
-            <b-form-textarea v-model="form.content" required></b-form-textarea>
+            <!-- <b-form-textarea v-model="form.content" required></b-form-textarea> -->
+            <!-- WYSIWYG editor instead of textarea-->
+            <quill-editor v-model="content" required></quill-editor>
           </b-form-group>
 
           <b-button class="mb-2" type="submit" variant="primary">Submit</b-button>
@@ -73,6 +75,8 @@
 </template>
 
 <script>
+import { quillEditor } from "vue-quill-editor";
+
 export default {
   name: "ArticleForm",
   props: {
@@ -80,6 +84,9 @@ export default {
       type: Function,
       required: true,
     },
+  },
+  components: {
+    quillEditor,
   },
   data() {
     return {
@@ -92,6 +99,7 @@ export default {
         content: "",
       },
       companies: ["Company A", "Company B", "Company C"], // Sample company options
+      content: "", //quill code starterpack?
     };
   },
   methods: {
