@@ -31,11 +31,20 @@ MockServer (use seperate project? worry about this later, VUE components first)
 
 //make things work -> then slowly implement everything, not all at once for a better pacing
 >>Dynamically show Writer/EditorDashboard, depending on the type of user (use VUEX)
->>View article -> carry the id of the article, api call articles/1 -> render the data there
->>Add article  -> api post
+>>View article -> carry the id of the article, api call articles/1 -> render the data there 
+>>Add article  -> /// (working, image is hardcoded for now, work on it on October 6, get edit working first)
 >>Edit article (re-use same modal) when you get view working //edit and publish for editor
 >>Add/Update Users(for editors only)
 >>Add/Update Companies (for editors only)
+
+>>Oct 6
+image uploading, edit + publishing articles
+Adding Companies
+Adding users
+
+>>October 7 12PM, clean up, do not rush and submit what you finished
+>>do not work on the missing things, time to clean up and clock in, deploy json-server to GCP VM, get it working
+>>adjust .env urls, then deploy Vue Frontend to surge 
 
 -Get everything working locally
 !!!Document in readme.md how to get your project running (test it too, fresh github clone, npm install then npm run serve iirc)!!!

@@ -96,7 +96,7 @@ export default {
         date: new Date().toISOString().substr(0, 10), // Default to current date
         content: "",
       },
-      companies: ["Company A", "Company B", "Company C"], // Sample company options
+      companies: [], // Sample company options
       content: "", //quill code starterpack?
     };
   },
@@ -104,6 +104,37 @@ export default {
     onSubmit() {
       // Handle the form submission logic here
       console.log("Form submitted:", this.form);
+
+      //upload the image to firebase -> magically get the public url, and append that to the json server, not the blob
+
+      const articleData = {
+        image:
+          "https://firebasestorage.googleapis.com/v0/b/archintel-imagestorage.appspot.com/o/122.PNG?alt=media&token=2c391603-ea74-477d-ad18-4241f2cced9a",
+        title: this.form.title,
+        link: this.form.link,
+        date: this.form.date,
+        content: this.content,
+        status: this.form.status,
+        Writer: this.$store.state.user.firstname + " " + this.$store.state.user.lastname,
+        Editor: "",
+        company: this.form.company,
+      };
+
+      fetch("http://localhost:3000/articles", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(articleData),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Success:", data);
+          this.closeModal();
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
     },
     isValidURL(string) {
       try {
@@ -113,6 +144,23 @@ export default {
         return false;
       }
     },
+  },
+
+  //get list of companies
+  async mounted() {
+    this.isLoading = true;
+    try {
+      const response = await fetch(process.env.VUE_APP_API_ENDPOINT + "/companies");
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      let temp_data = await response.json();
+      this.companies = await temp_data.map((item) => item.name);
+    } catch (error) {
+      this.error = error.message;
+    } finally {
+      this.isLoading = false;
+    }
   },
 };
 </script>
