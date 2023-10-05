@@ -17,8 +17,17 @@ Components / Frontend (no functionalities yet, just the html/componnents)
 MockServer (use seperate project? worry about this later, VUE components first)
 
 
+
+
 -Mix and Match-
 >add axios to Vue Project
+
+>>login logic Vue -> ok
+>>VUEX type (writer/editor) ->
+>>Implement logout/no access if VueX writer/editor empty =>
+>>Dynamically show Writer/EditorDashboard, depending on the type of user
+>>View article, replace hardcoded data with actual API json-server data
+>>Add article 
 
 
 -Get everything working locally

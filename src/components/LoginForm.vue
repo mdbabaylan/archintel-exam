@@ -46,19 +46,29 @@ export default {
   },
   methods: {
     async onSubmit() {
-      console.log(this.username);
-      console.log(this.password);
-
       //console.log("Form submitted:", this.form);
       const response = await fetch(
         `http://localhost:3000/users?username=${this.username}`
       );
       const users = await response.json();
+      console.log(users[0].type);
 
       if (users.length && users[0].password === this.password) {
         // Successful login
         console.log("Logged in successfully!");
-        // Store user data, navigate to dashboard, etc.
+        this.$store.commit("SET_USER", {
+          firstname: users[0].firstname,
+          lastname: users[0].lastname,
+          type: users[0].type,
+        }); //store to VueX
+
+        //access data from VueX
+        console.log(this.$store.state.user);
+        //access the username property from VueX
+        console.log(this.$store.state.user.lastname);
+
+        //redirect to dashboard
+        this.$router.push({ path: "/" });
       } else {
         // Invalid credentials
         console.log("Invalid username or password");
