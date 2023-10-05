@@ -8,7 +8,7 @@ Components / Frontend (no functionalities yet, just the html/componnents)
 >>Add Article Form modal (), ///
 >>Login Form /// Oct 4
 >>Edit Article modal () >> copy paste Add article modal, but come back to this later when backend is ready to go
->>All Media
+>>All Media //writer only for now, copy-paste for editor, best to do when mock server is functional, mock server after lunchbreak. LFG
 
 
 

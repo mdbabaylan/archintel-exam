@@ -4,7 +4,7 @@
       <!-- Custom table header using the thead-top slot -->
       <template #thead-top>
         <tr>
-          <th colspan="7" class="text-center">Writer's Dashboard - For Edit</th>
+          <th colspan="7" class="text-center">All Media - Writer</th>
         </tr>
       </template>
       <!-- Custom column headers (optional) -->
@@ -15,42 +15,26 @@
       <template #head(writer_name)> Writer </template>
       <template #head(editor_name)> Editor </template>
       <template #head()> Editor </template>
+      <!-- render the edit button -->
       <template #cell(status)="data">
         <b-button
           variant="success"
-          v-if="data.item.status === 'For Edit'"
+          v-if="data.item.status !== 'Published'"
           @click="handleButtonClick(data.item)"
           >Edit</b-button
         >
-        <td v-if="data.item.status !== 'For Edit'">{{ data.item.status }}</td>
+        <td v-if="data.item.status === 'Published'">{{ data.item.status }}</td>
       </template>
-    </b-table>
-
-    <br />
-    <br />
-    <br />
-
-    <b-table :items="items">
-      <!-- Custom table header using the thead-top slot -->
-      <template #thead-top>
-        <tr>
-          <th colspan="6" class="text-center">Writer's Dashboard - Published</th>
-        </tr>
+      <!-- render the image -->
+      <template #cell(image)="">
+        <img :src="require('@/assets/girl.jpg')" width="120" height="110" alt="Girl" />
       </template>
-      <!-- Custom column headers (optional) -->
-      <template #head(image)> Image </template>
-      <template #head(title)> Title </template>
-      <template #head(link)> Link </template>
-      <template #head(date)> Date </template>
-      <template #head(writer_name)> Writer </template>
-      <template #head(editor_name)> Editor </template>
     </b-table>
   </div>
 </template>
-
 <script>
 export default {
-  name: "WriterDashBoard",
+  name: "HelloWorld",
   props: {
     msg: String,
   },
@@ -60,7 +44,8 @@ export default {
       items: [
         {
           //article_id: 40,
-          image: "Dickerson",
+          image:
+            "https://isorepublic.com/wp-content/uploads/2023/02/iso-republic-meredith-34-733x1100.jpg",
           title: "Macdonald",
           link: "http://localhost:8081/dashboard",
           date: "04-10-2023",
@@ -70,7 +55,7 @@ export default {
         },
         {
           //article_id: 30,
-          image: "Mark",
+          image: "girl.jpg",
           title: "Macdonald",
           link: "http://localhost:8081/dashboard",
           date: "04-10-2023",
@@ -80,7 +65,8 @@ export default {
         },
         {
           //article_id: 20,
-          image: "Jacked Gymbro",
+          image:
+            "https://isorepublic.com/wp-content/uploads/2023/02/iso-republic-meredith-34-733x1100.jpg",
           title: "Macdonald",
           link: "http://localhost:8081/dashboard",
           date: "04-10-2023",
@@ -90,8 +76,9 @@ export default {
         },
         {
           //article_id: 35,
-          image: "Oompa Loompa",
-          title: "Macdonald",
+          image:
+            "https://isorepublic.com/wp-content/uploads/2023/02/iso-republic-meredith-34-733x1100.jpg",
+          title: "Oompa Loompa",
           link: "http://localhost:8081/dashboard",
           date: "04-10-2023",
           writer_name: "Writer",

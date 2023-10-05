@@ -17,6 +17,7 @@
       <template #head()> Editor </template>
       <template #cell(status)="data">
         <b-button
+          variant="success"
           v-if="data.item.status === 'For Edit'"
           @click="handleButtonClick(data.item)"
           >Edit</b-button

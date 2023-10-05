@@ -7,15 +7,21 @@
       >
     </div>
     <ArticleForm v-if="isVisible" :closeModal="toggleVisibility" />
+    <!-- Toggle between writer/editor, display writer for now-->
+    <WriterDashBoard />
   </div>
 </template>
 
 <script>
 import ArticleForm from "./ArticleForm.vue";
+import WriterDashBoard from "./WriterDashBoard.vue";
+//import EditorDashBoard from "./EditorDashBoard.vue";
 export default {
   name: "DashBoard",
   components: {
     ArticleForm,
+    WriterDashBoard,
+    //EditorDashBoard,
   },
   props: {
     msg: String,
