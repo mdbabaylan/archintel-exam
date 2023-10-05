@@ -9,7 +9,7 @@
       >
         <b-form-input
           id="input-username"
-          v-model="form.username"
+          v-model="username"
           required
           placeholder="Enter username"
         ></b-form-input>
@@ -24,7 +24,7 @@
         <b-form-input
           id="input-password"
           type="password"
-          v-model="form.password"
+          v-model="password"
           required
           placeholder="Enter password"
         ></b-form-input>
@@ -40,16 +40,29 @@ export default {
   name: "LoginForm",
   data() {
     return {
-      form: {
-        username: "",
-        password: "",
-      },
+      username: "",
+      password: "",
     };
   },
   methods: {
-    onSubmit() {
-      // Handle the login logic here
-      console.log("Form submitted:", this.form);
+    async onSubmit() {
+      console.log(this.username);
+      console.log(this.password);
+
+      //console.log("Form submitted:", this.form);
+      const response = await fetch(
+        `http://localhost:3000/users?username=${this.username}`
+      );
+      const users = await response.json();
+
+      if (users.length && users[0].password === this.password) {
+        // Successful login
+        console.log("Logged in successfully!");
+        // Store user data, navigate to dashboard, etc.
+      } else {
+        // Invalid credentials
+        console.log("Invalid username or password");
+      }
     },
   },
 };

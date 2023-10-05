@@ -12,9 +12,12 @@ npm run serve
 ### User Credentials
 ```
 Writer:
+username:writer1
+password:writer1
 
 Editor:
-```
+username:editor1
+password:editor1
 
 
 ### Customize configuration

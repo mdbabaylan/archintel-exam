@@ -27,7 +27,11 @@
             <template #button-content>
               <em>User</em>
             </template>
-            <b-dropdown-item href="#">Log Out</b-dropdown-item>
+            <b-dropdown-item href="#"
+              ><router-link to="/login" class="not-white"
+                >Log Out</router-link
+              ></b-dropdown-item
+            >
           </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>
@@ -62,6 +66,10 @@ a {
 
 .custom-nav-item {
   color: white !important; /* Change text color to white */
+}
+
+.not-white {
+  color: black !important; /* Change text color to white */
 }
 
 .custom-nav-item:hover {
