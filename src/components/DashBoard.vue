@@ -1,22 +1,34 @@
 <template>
   <div>
-    <p>Dashboard. Conditionally render Writer or Editor depending on the user type</p>
     <div class="d-flex justify-content-end">
       <!-- writer only, add conditionals when merged with backend/mock server -->
-      <b-button variant="success" class="me-2">Add article</b-button>
+      <b-button variant="success" class="mt-2 me-2" @click="toggleVisibility"
+        >Add article</b-button
+      >
     </div>
+    <ArticleForm v-if="isVisible" :closeModal="toggleVisibility" />
   </div>
 </template>
 
 <script>
+import ArticleForm from "./ArticleForm.vue";
 export default {
   name: "DashBoard",
+  components: {
+    ArticleForm,
+  },
   props: {
     msg: String,
   },
   data() {
-    // Image, Title, Link, Date, Writer Name and Editor Name
-    return {};
+    return {
+      isVisible: false,
+    };
+  },
+  methods: {
+    toggleVisibility() {
+      this.isVisible = !this.isVisible;
+    },
   },
 };
 </script>

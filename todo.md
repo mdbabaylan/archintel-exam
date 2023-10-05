@@ -5,9 +5,9 @@ Components / Frontend (no functionalities yet, just the html/componnents)
 >Dashboard for Writer ///  Oct 4
 >Dashboard for Editor ///  Oct 4
 >>Add a button (Add article button), writer only ///  Oct 4
->>Add Article Form modal (), finish this, then re-use for Edit
+>>Add Article Form modal (), ///
 >>Login Form /// Oct 4
->>Edit Article modal ()
+>>Edit Article modal () >> copy paste Add article modal, but come back to this later when backend is ready to go
 >>All Media
 
 
