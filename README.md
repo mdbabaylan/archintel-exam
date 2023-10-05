@@ -7,7 +7,9 @@ npm install
 
 ## How to run the project
 ```
-npm run serve
+1)run json-server first, copy-paste the url it will provide you into `.env`
+2)paste and save
+3)npm run serve
 ```
 ### User Credentials
 ```

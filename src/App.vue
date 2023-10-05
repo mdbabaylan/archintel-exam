@@ -49,6 +49,7 @@ export default {
   methods: {
     logout() {
       this.$store.commit("SET_LOGIN_STATUS", false);
+      localStorage.setItem("isLoggedIn", false);
       this.$router.push("/login");
     },
   },

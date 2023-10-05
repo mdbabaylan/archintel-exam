@@ -52,10 +52,10 @@ export default {
       );
       const users = await response.json();
       //console.log(users[0].type);
-
       if (users.length && users[0].password === this.password) {
         // Successful login
         console.log("Logged in successfully!");
+
         this.$store.commit("SET_USER", {
           firstname: users[0].firstname,
           lastname: users[0].lastname,
@@ -63,12 +63,13 @@ export default {
         }); //store to VueX
 
         //access data from VueX
-        console.log(this.$store.state.user);
+        //console.log(this.$store.state.user);
         //access the username property from VueX
-        console.log(this.$store.state.user.lastname);
+        //console.log(this.$store.state.user.lastname);
 
         //toggle as logged in
         this.$store.commit("SET_LOGIN_STATUS", true);
+        localStorage.setItem("isLoggedIn", true);
 
         //redirect to dashboard
         this.$router.push({ path: "/" });

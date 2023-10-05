@@ -22,17 +22,22 @@ MockServer (use seperate project? worry about this later, VUE components first)
 -Mix and Match-
 >add axios to Vue Project
 
->>login logic Vue -> ok
->>VUEX type (writer/editor) ->
->>Implement logout/no access if VueX writer/editor empty =>
->>Dynamically show Writer/EditorDashboard, depending on the type of user
+>>login logic Vue -> ok ////
+>>Implement logout/no access if VueX writer/editor empty => ////
+>>all working, weird bug in Vue though -> refresh browser -> state resets, so you get logged out (fix this after finishing the article functions, not a prio) ARTICLES first
+
+>>All media fetch from API json server writer AND editor (except the Edit Article function) //
+>>fetch from API json server for Writer and Editor's dashboard (also double check the logic) (except the Article functions) 
+
+>>Dynamically show Writer/EditorDashboard, depending on the type of user (use VUEX)
 >>View article, replace hardcoded data with actual API json-server data
 >>Add article 
-
+>>Edit article (re-use same modal)
 
 -Get everything working locally
 !!!Document in readme.md how to get your project running (test it too, fresh github clone, npm install then npm run serve iirc)!!!
 
--Deploy VUE to Surge
+-use .env, deploy backend to GCP VM or firebase first before surge (so you can get the URL and match it to the .env)
+-Deploy backend to GCP VM / Firebase
+-Deploy VUE to Surge 
 
--Deploy backend to GCP VM
