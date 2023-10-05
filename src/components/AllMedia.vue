@@ -26,8 +26,8 @@
         <td v-if="data.item.status === 'Published'">{{ data.item.status }}</td>
       </template>
       <!-- render the image -->
-      <template #cell(image)="">
-        <img :src="require('@/assets/girl.jpg')" width="120" height="110" alt="Girl" />
+      <template #cell(image)="data">
+        <img :src="data.item.image" width="120" height="110" alt="Girl" />
       </template>
     </b-table>
   </div>
@@ -45,7 +45,7 @@ export default {
         {
           //article_id: 40,
           image:
-            "https://isorepublic.com/wp-content/uploads/2023/02/iso-republic-meredith-34-733x1100.jpg",
+            "https://firebasestorage.googleapis.com/v0/b/archintel-imagestorage.appspot.com/o/122.PNG?alt=media&token=2c391603-ea74-477d-ad18-4241f2cced9a",
           title: "Macdonald",
           link: "http://localhost:8081/dashboard",
           date: "04-10-2023",
@@ -55,7 +55,8 @@ export default {
         },
         {
           //article_id: 30,
-          image: "girl.jpg",
+          image:
+            "https://firebasestorage.googleapis.com/v0/b/archintel-imagestorage.appspot.com/o/kohler.png?alt=media&token=b1b87960-5c7a-4f8b-a5f2-6b9a98c924d5",
           title: "Macdonald",
           link: "http://localhost:8081/dashboard",
           date: "04-10-2023",
@@ -66,8 +67,8 @@ export default {
         {
           //article_id: 20,
           image:
-            "https://isorepublic.com/wp-content/uploads/2023/02/iso-republic-meredith-34-733x1100.jpg",
-          title: "Macdonald",
+            "https://firebasestorage.googleapis.com/v0/b/archintel-imagestorage.appspot.com/o/1fe.png?alt=media&token=3bd389f8-a360-4425-9ae7-1bcf7521602d",
+          title: "Kohler",
           link: "http://localhost:8081/dashboard",
           date: "04-10-2023",
           writer_name: "Writer",
@@ -77,8 +78,8 @@ export default {
         {
           //article_id: 35,
           image:
-            "https://isorepublic.com/wp-content/uploads/2023/02/iso-republic-meredith-34-733x1100.jpg",
-          title: "Oompa Loompa",
+            "https://firebasestorage.googleapis.com/v0/b/archintel-imagestorage.appspot.com/o/122.PNG?alt=media&token=2c391603-ea74-477d-ad18-4241f2cced9a",
+          title: "Macdonald",
           link: "http://localhost:8081/dashboard",
           date: "04-10-2023",
           writer_name: "Writer",
