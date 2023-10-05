@@ -5,20 +5,17 @@
 npm install
 ```
 
-### Compiles and hot-reloads for development
+## How to run the project
 ```
 npm run serve
 ```
+### User Credentials
+```
+Writer:
 
-### Compiles and minifies for production
-```
-npm run build
+Editor:
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
