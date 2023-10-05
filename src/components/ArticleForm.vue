@@ -2,9 +2,6 @@
   <div class="modal-overlay">
     <div class="modal-content">
       <b-col md="11" class="mx-auto">
-        <div class="d-flex justify-content-end">
-          <b-button class="mb-2" variant="danger" @click="closeModal">X</b-button>
-        </div>
         <b-form class="justify-content-center" @submit.prevent="onSubmit">
           <!-- Related Company -->
           <b-form-group
@@ -68,6 +65,7 @@
           </b-form-group>
 
           <b-button class="mb-2" type="submit" variant="primary">Submit</b-button>
+          <b-button class="mb-2" variant="danger" @click="closeModal">Close</b-button>
         </b-form>
       </b-col>
     </div>
@@ -125,6 +123,7 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
+  overflow-y: auto;
   background-color: rgba(0, 0, 0, 0.7); /* 70% black opacity */
   display: flex;
   justify-content: center;

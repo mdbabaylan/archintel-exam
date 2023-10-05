@@ -69,7 +69,7 @@ export default {
 
         //toggle as logged in
         this.$store.commit("SET_LOGIN_STATUS", true);
-        localStorage.setItem("isLoggedIn", true);
+        //localStorage.setItem("isLoggedIn", true);
 
         //redirect to dashboard
         this.$router.push({ path: "/" });

@@ -8,20 +8,21 @@
     </div>
     <ArticleForm v-if="isVisible" :closeModal="toggleVisibility" />
     <!-- Toggle between writer/editor, display writer for now-->
-    <WriterDashBoard />
+    <WriterDashBoard v-if="this.$store.state.user.type === 'writer'" />
+    <EditorDashBoard v-if="this.$store.state.user.type === 'editor'" />
   </div>
 </template>
 
 <script>
 import ArticleForm from "./ArticleForm.vue";
 import WriterDashBoard from "./WriterDashBoard.vue";
-//import EditorDashBoard from "./EditorDashBoard.vue";
+import EditorDashBoard from "./EditorDashBoard.vue";
 export default {
   name: "DashBoard",
   components: {
     ArticleForm,
     WriterDashBoard,
-    //EditorDashBoard,
+    EditorDashBoard,
   },
   props: {
     msg: String,

@@ -29,10 +29,13 @@ MockServer (use seperate project? worry about this later, VUE components first)
 >>All media fetch from API json server writer AND editor (except the Edit Article function) //
 >>fetch from API json server for Writer and Editor's dashboard (also double check the logic) (except the Article functions) 
 
+//make things work -> then slowly implement everything, not all at once for a better pacing
 >>Dynamically show Writer/EditorDashboard, depending on the type of user (use VUEX)
->>View article, replace hardcoded data with actual API json-server data
->>Add article 
->>Edit article (re-use same modal)
+>>View article -> carry the id of the article, api call articles/1 -> render the data there
+>>Add article  -> api post
+>>Edit article (re-use same modal) when you get view working //edit and publish for editor
+>>Add/Update Users(for editors only)
+>>Add/Update Companies (for editors only)
 
 -Get everything working locally
 !!!Document in readme.md how to get your project running (test it too, fresh github clone, npm install then npm run serve iirc)!!!

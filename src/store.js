@@ -14,9 +14,9 @@ export default new Vuex.Store({
     SET_USER(state, user) {
       state.user = user;
     },
-    SET_LOGIN_STATUS(state) {
-      state.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true'; //localStorage + vueX to fix the logout bug when I refresh the browser
-    },
+    SET_LOGIN_STATUS(state, status) {
+      state.isLoggedIn = status;
+    }
     // ... other mutations
   },
   actions: {

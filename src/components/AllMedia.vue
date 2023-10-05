@@ -15,7 +15,7 @@
         <!-- Custom table header using the thead-top slot -->
         <template #thead-top>
           <tr>
-            <th colspan="7" class="text-center">All Media - Writer</th>
+            <th colspan="10" class="text-center">All Media - Writer</th>
           </tr>
         </template>
         <!-- Custom column headers (optional) -->
@@ -25,7 +25,6 @@
         <template #head(date)> Date </template>
         <template #head(writer_name)> Writer </template>
         <template #head(editor_name)> Editor </template>
-        <template #head()> Editor </template>
         <!-- render the edit button -->
         <template #cell(status)="data">
           <b-button
@@ -59,7 +58,7 @@
         <!-- Custom table header using the thead-top slot -->
         <template #thead-top>
           <tr>
-            <th colspan="7" class="text-center">All Media - Editor</th>
+            <th colspan="10" class="text-center">All Media - Editor</th>
           </tr>
         </template>
         <!-- Custom column headers (optional) -->
@@ -69,7 +68,7 @@
         <template #head(date)> Date </template>
         <template #head(writer_name)> Writer </template>
         <template #head(editor_name)> Editor </template>
-        <template #head()> Editor </template>
+
         <!-- render the edit button -->
         <template #cell(status)="data">
           <b-button variant="success" @click="handleButtonClick(data.item)"

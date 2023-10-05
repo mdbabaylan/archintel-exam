@@ -1,10 +1,15 @@
 <template>
   <div class="table-responsive-sm table-responsive-md table-responsive-lg">
-    <b-table :items="items">
-      <!-- Custom table header using the thead-top slot -->
+    <!-- Display error message if there's an error -->
+    <div v-if="error">{{ error }}</div>
+
+    <!-- Display loader while fetching data -->
+    <div v-if="isLoading">Loading...</div>
+
+    <b-table v-else :items="for_edit_items">
       <template #thead-top>
         <tr>
-          <th colspan="7" class="text-center">Editor's Dashboard - For Publish</th>
+          <th colspan="10" class="text-center">Editor's Dashboard - For Publish</th>
         </tr>
       </template>
       <!-- Custom column headers (optional) -->
@@ -14,7 +19,6 @@
       <template #head(date)> Date </template>
       <template #head(writer_name)> Writer </template>
       <template #head(editor_name)> Editor </template>
-      <template #head()> Editor </template>
       <template #cell(status)="data">
         <b-button
           variant="success"
@@ -24,26 +28,43 @@
         >
         <td v-if="data.item.status !== 'For Edit'">{{ data.item.status }}</td>
       </template>
+
+      <template #cell(image)="data">
+        <img :src="data.item.image" width="120" height="110" alt="Girl" />
+      </template>
     </b-table>
 
     <br />
     <br />
     <br />
 
-    <b-table :items="items">
+    <!-- Display error message if there's an error -->
+    <div v-if="error">{{ error }}</div>
+
+    <!-- Display loader while fetching data -->
+    <div v-if="isLoading">Loading...</div>
+
+    <b-table v-else :items="for_publishing_items">
       <!-- Custom table header using the thead-top slot -->
       <template #thead-top>
         <tr>
-          <th colspan="6" class="text-center">Editor's Dashboard - Published</th>
+          <th colspan="10" class="text-center">Editor's Dashboard - Published)</th>
         </tr>
       </template>
       <!-- Custom column headers (optional) -->
+      <!-- <template #cell(image)="">
+        <img :src="data.items.image" width="120" height="110" alt="Girl" />
+      </template> -->
       <template #head(image)> Image </template>
       <template #head(title)> Title </template>
       <template #head(link)> Link </template>
       <template #head(date)> Date </template>
       <template #head(writer_name)> Writer </template>
       <template #head(editor_name)> Editor </template>
+
+      <template #cell(image)="data">
+        <img :src="data.item.image" width="120" height="110" alt="Girl" />
+      </template>
     </b-table>
   </div>
 </template>
@@ -57,49 +78,31 @@ export default {
   data() {
     // Image, Title, Link, Date, Writer Name and Editor Name
     return {
-      items: [
-        {
-          //article_id: 40,
-          image: "Dickerson",
-          title: "Macdonald",
-          link: "http://localhost:8081/dashboard",
-          date: "04-10-2023",
-          writer_name: "Writer",
-          editor_name: "Editor NameAAAAAAAAAAAAAAAAAAAAAAAAA",
-          status: "For Edit",
-        },
-        {
-          //article_id: 30,
-          image: "Mark",
-          title: "Macdonald",
-          link: "http://localhost:8081/dashboard",
-          date: "04-10-2023",
-          writer_name: "Writer",
-          editor_name: "Editor Name",
-          status: "Published",
-        },
-        {
-          //article_id: 20,
-          image: "Jacked Gymbro",
-          title: "Macdonald",
-          link: "http://localhost:8081/dashboard",
-          date: "04-10-2023",
-          writer_name: "Writer",
-          editor_name: "Editor Name",
-          status: "Published",
-        },
-        {
-          //article_id: 35,
-          image: "Oompa Loompa",
-          title: "Macdonald",
-          link: "http://localhost:8081/dashboard",
-          date: "04-10-2023",
-          writer_name: "Writer",
-          editor_name: "Editor Name",
-          status: "For Edit",
-        },
-      ],
+      for_edit_items: [],
+      for_publishing_items: [],
+      isLoading: false,
+      error: null,
     };
+  },
+  async mounted() {
+    this.isLoading = true;
+    try {
+      const response = await fetch(process.env.VUE_APP_API_ENDPOINT + "/articles");
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      let temp_data = await response.json();
+      this.for_edit_items = await temp_data.filter((item) => item.status == "For Edit");
+      this.for_publishing_items = await temp_data.filter(
+        (item) => item.status == "Published"
+      );
+      //this.items = await response.json();
+    } catch (error) {
+      this.error = error.message;
+    } finally {
+      this.isLoading = false;
+    }
   },
 };
 </script>
