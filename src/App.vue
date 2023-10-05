@@ -27,8 +27,8 @@
             <template #button-content>
               <em>User</em>
             </template>
-            <b-dropdown-item href="#"
-              ><router-link to="/login" class="not-white"
+            <b-dropdown-item href="#" @click="logout"
+              ><router-link to="#" class="not-white"
                 >Log Out</router-link
               ></b-dropdown-item
             >
@@ -46,6 +46,12 @@
 // You don't need to import the components here anymore since they're handled by the router
 export default {
   name: "App",
+  methods: {
+    logout() {
+      this.$store.commit("SET_LOGIN_STATUS", false);
+      this.$router.push("/login");
+    },
+  },
 };
 </script>
 

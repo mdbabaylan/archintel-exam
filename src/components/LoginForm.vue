@@ -51,7 +51,7 @@ export default {
         `http://localhost:3000/users?username=${this.username}`
       );
       const users = await response.json();
-      console.log(users[0].type);
+      //console.log(users[0].type);
 
       if (users.length && users[0].password === this.password) {
         // Successful login
@@ -66,6 +66,9 @@ export default {
         console.log(this.$store.state.user);
         //access the username property from VueX
         console.log(this.$store.state.user.lastname);
+
+        //toggle as logged in
+        this.$store.commit("SET_LOGIN_STATUS", true);
 
         //redirect to dashboard
         this.$router.push({ path: "/" });
