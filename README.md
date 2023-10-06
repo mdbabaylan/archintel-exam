@@ -33,3 +33,13 @@ VUE_APP_API_ENDPOINT=http://localhost:3000
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+api documentation 
+http://35.201.178.11:3000/articles
+http://35.201.178.11:3000/companies
+http://35.201.178.11:3000/users
+
+
+Thank you for the opportunity
+Have a good day!
