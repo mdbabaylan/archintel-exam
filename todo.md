@@ -50,8 +50,8 @@ All media Editor edit //
 
 >><<
 Final 
-WriterDashBoard -> copy the watch {} code in Allmedia to for re-render after adding/editing
-EditorDashBoard -> copy the watch {} code in Allmedia to for re-render after adding/editing
+WriterDashBoard -> //
+EditorDashBoard -> //
 Adding/Update Companies (Editor Only) (new component)
 Adding/Update users  (Editor Only) (new component)
 >><<

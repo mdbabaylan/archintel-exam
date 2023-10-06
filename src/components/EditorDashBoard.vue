@@ -93,6 +93,26 @@ export default {
     toggleVisibility(articleObject) {
       this.article = articleObject;
       this.isEditorVisible = !this.isEditorVisible;
+    },
+    async fetchData() {
+      this.isLoading = true;
+      try {
+        const response = await fetch(process.env.VUE_APP_API_ENDPOINT + "/articles");
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        let temp_data = await response.json();
+        this.for_edit_items = await temp_data.filter((item) => item.status == "For Edit");
+        this.for_publishing_items = await temp_data.filter(
+          (item) => item.status == "Published"
+        );
+        //this.items = await response.json();
+      } catch (error) {
+        this.error = error.message;
+      } finally {
+        this.isLoading = false;
+      }
     }
   },
   async mounted() {
@@ -115,6 +135,13 @@ export default {
       this.isLoading = false;
     }
   },
+  watch: {
+    isEditorVisible(newValue, oldValue) { //for editor, make one for writer, also implement this code in Editor and Writer Dashboard
+      if (oldValue === true && newValue === false) {
+        this.fetchData();
+      }
+    }
+  }
 };
 </script>
 
