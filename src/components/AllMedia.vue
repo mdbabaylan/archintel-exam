@@ -1,10 +1,9 @@
 <template>
   <div>
     <!-- Writer -->
-    <div
-      class="table-responsive-sm table-responsive-md table-responsive-lg"
-      v-if="this.$store.state.user.type === 'writer'"
-    >
+    <EditArticleForm v-if="isEditorVisible" :closeModal="toggleVisibility" :article="article" />
+    <div class="table-responsive-sm table-responsive-md table-responsive-lg"
+      v-if="this.$store.state.user.type === 'writer'">
       <!-- Display error message if there's an error -->
       <div v-if="error">{{ error }}</div>
 
@@ -27,12 +26,7 @@
         <template #head(editor_name)> Editor </template>
         <!-- render the edit button -->
         <template #cell(status)="data">
-          <b-button
-            variant="success"
-            v-if="data.item.status !== 'Published'"
-            @click="handleButtonClick(data.item)"
-            >Edit</b-button
-          >
+          <b-button variant="success" @click="toggleVisibility(data.item)">Edit</b-button>
           <td v-if="data.item.status === 'Published'">{{ data.item.status }}</td>
         </template>
         <!-- render the image -->
@@ -44,10 +38,9 @@
     <!-- Writer -->
 
     <!-- Editor -->
-    <div
-      class="table-responsive-sm table-responsive-md table-responsive-lg"
-      v-if="this.$store.state.user.type === 'editor'"
-    >
+    <EditArticleFormEditor v-if="isEditorFormVisible" :closeModal="toggleEVisibility" :article="article" />
+    <div class="table-responsive-sm table-responsive-md table-responsive-lg"
+      v-if="this.$store.state.user.type === 'editor'">
       <!-- Display error message if there's an error -->
       <div v-if="error">{{ error }}</div>
 
@@ -71,9 +64,7 @@
 
         <!-- render the edit button -->
         <template #cell(status)="data">
-          <b-button variant="success" @click="handleButtonClick(data.item)"
-            >Edit</b-button
-          >
+          <b-button variant="success" @click="toggleEVisibility(data.item)">Edit</b-button>
         </template>
         <!-- render the image -->
         <template #cell(image)="data">
@@ -85,8 +76,14 @@
   </div>
 </template>
 <script>
+import EditArticleFormEditor from "./EditArticleFormEditor.vue";
+import EditArticleForm from "./EditArticleForm.vue";
 export default {
   name: "HelloWorld",
+  components: {
+    EditArticleFormEditor,
+    EditArticleForm
+  },
   props: {
     msg: String,
   },
@@ -96,7 +93,33 @@ export default {
       items: [],
       isLoading: false,
       error: null,
+      isEditorFormVisible: false,
+      isEditorVisible: false,
     };
+  },
+  methods: {
+    toggleEVisibility(articleObject) {
+      this.article = articleObject;
+      this.isEditorFormVisible = !this.isEditorFormVisible;
+    },
+    toggleVisibility(articleObject) {
+      this.article = articleObject;
+      this.isEditorVisible = !this.isEditorVisible;
+    },
+    async fetchData() {
+      this.isLoading = true;
+      try {
+        const response = await fetch(process.env.VUE_APP_API_ENDPOINT + "/articles");
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        this.items = await response.json();
+      } catch (error) {
+        this.error = error.message;
+      } finally {
+        this.isLoading = false;
+      }
+    }
   },
   async mounted() {
     this.isLoading = true;
@@ -112,6 +135,18 @@ export default {
       this.isLoading = false;
     }
   },
+  watch: {
+    isEditorFormVisible(newValue, oldValue) { //for editor, make one for writer, also implement this code in Editor and Writer Dashboard
+      if (oldValue === true && newValue === false) {
+        this.fetchData();
+      }
+    },
+    isEditorVisible(newValue, oldValue) { //for editor, make one for writer, also implement this code in Editor and Writer Dashboard
+      if (oldValue === true && newValue === false) {
+        this.fetchData();
+      }
+    }
+  }
 };
 </script>
 
@@ -120,14 +155,17 @@ export default {
 h3 {
   margin: 40px 0 0;
 }
+
 ul {
   list-style-type: none;
   padding: 0;
 }
+
 li {
   display: inline-block;
   margin: 0 10px;
 }
+
 a {
   color: #42b983;
 }

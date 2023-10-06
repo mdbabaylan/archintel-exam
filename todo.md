@@ -46,7 +46,8 @@ Publish Article Editor //
 
 --Final 4 for Oct 6--
 All media Writer Edit
-All media editor edit
+All media Editor edit
+
 Adding/Update Companies (Editor Only)
 Adding/Update users  (Editor Only)
 
