@@ -6,8 +6,8 @@
     </div>
     <ArticleForm v-if="isVisible" :closeModal="toggleVisibility" />
     <!-- Toggle between writer/editor, display writer for now-->
-    <WriterDashBoard v-if="this.$store.state.user.type === 'writer'" />
-    <EditorDashBoard v-if="this.$store.state.user.type === 'editor'" />
+    <WriterDashBoard v-if="this.$store.state.user.type === 'writer'" :key="writerKey" />
+    <EditorDashBoard v-if="this.$store.state.user.type === 'editor'" :key="editorKey" />
   </div>
 </template>
 
@@ -35,6 +35,14 @@ export default {
       this.isVisible = !this.isVisible;
     }
   },
+  watch: {
+    isVisible(newValue, oldValue) { //for editor, make one for writer, also implement this code in Editor and Writer Dashboard
+      if (oldValue === true && newValue === false) {
+        this.writerKey += 1;
+        this.editorKey += 1;
+      }
+    }
+  }
 };
 </script>
 
