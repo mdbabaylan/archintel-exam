@@ -2,9 +2,7 @@
   <div>
     <div class="d-flex justify-content-end">
       <!-- writer only, add conditionals when merged with backend/mock server -->
-      <b-button variant="success" class="mt-2 me-2" @click="toggleVisibility"
-        >Add article</b-button
-      >
+      <b-button variant="success" class="mt-2 me-2" @click="toggleVisibility">Add article</b-button>
     </div>
     <ArticleForm v-if="isVisible" :closeModal="toggleVisibility" />
     <!-- Toggle between writer/editor, display writer for now-->
@@ -35,7 +33,7 @@ export default {
   methods: {
     toggleVisibility() {
       this.isVisible = !this.isVisible;
-    },
+    }
   },
 };
 </script>
@@ -45,14 +43,17 @@ export default {
 h3 {
   margin: 40px 0 0;
 }
+
 ul {
   list-style-type: none;
   padding: 0;
 }
+
 li {
   display: inline-block;
   margin: 0 10px;
 }
+
 a {
   color: #42b983;
 }

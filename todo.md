@@ -38,9 +38,17 @@ MockServer (use seperate project? worry about this later, VUE components first)
 >>Add/Update Companies (for editors only)
 
 >>Oct 6
-image uploading (fireBaseconfig setup nitty gritty), then edit + publishing articles
-Adding Companies
-Adding users
+image uploading (fireBaseconfig setup nitty gritty), then edit + publishing articles ///
+View Article ///
+Edit Article Writer/// 
+
+Edit Article Editor
+
+All media (edit function, copy pasta from Dashboard)
+
+
+Adding/Update Companies (Editor Only)
+Adding/Update users  (Editor Only)
 
 >>October 7 12PM, clean up, do not rush and submit what you finished
 >>do not work on the missing things, time to clean up and clock in, deploy json-server to GCP VM, get it working
