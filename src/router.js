@@ -3,6 +3,8 @@ import VueRouter from 'vue-router';
 import AllMedia from './components/AllMedia.vue';
 import DashBoard from './components/DashBoard.vue';
 import LoginForm from './components/LoginForm.vue';
+import CompanyList from './components/CompanyList.vue';
+import UserList from './components/UserList.vue';
 import store from './store';
 
 Vue.use(VueRouter);
@@ -11,6 +13,8 @@ const routes = [
   { path: '/', component: AllMedia, meta: { requiresAuth: true } },
   { path: '/dashboard', component: DashBoard, meta: { requiresAuth: true } },
   { path: '/login', component: LoginForm },
+  { path: '/companylist', component: CompanyList },
+  { path: '/userlist', component: UserList }
 ];
 
 const router = new VueRouter({

@@ -1,6 +1,11 @@
 <template>
   <div>
     <EditArticleFormEditor v-if="isEditorVisible" :closeModal="toggleVisibility" :article="article" />
+    <div class="d-flex justify-content-end">
+      <!-- writer only, add conditionals when merged with backend/mock server -->
+      <b-button variant="outline-primary" class="mt-2 me-2" @click="goToCompanies">Companies</b-button>
+      <b-button variant="outline-primary" class="mt-2 me-2" @click="goToUsers">Users</b-button>
+    </div>
     <div class="table-responsive-sm table-responsive-md table-responsive-lg">
       <!-- Display error message if there's an error -->
       <div v-if="error">{{ error }}</div>
@@ -93,6 +98,12 @@ export default {
     toggleVisibility(articleObject) {
       this.article = articleObject;
       this.isEditorVisible = !this.isEditorVisible;
+    },
+    goToCompanies() {
+      this.$router.push({ path: "/companylist" });
+    },
+    goToUsers() {
+      this.$router.push({ path: "/userlist" });
     },
     async fetchData() {
       this.isLoading = true;

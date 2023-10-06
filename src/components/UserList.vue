@@ -79,7 +79,7 @@
 import EditArticleFormEditor from "./EditArticleFormEditor.vue";
 import EditArticleForm from "./EditArticleForm.vue";
 export default {
-  name: "AllMedia",
+  name: "UserList",
   components: {
     EditArticleFormEditor,
     EditArticleForm
