@@ -63,7 +63,7 @@ export default {
         status: "Active",
       };
 
-      fetch("http://localhost:3000/companies", {
+      fetch(process.env.VUE_APP_API_ENDPOINT + "/companies", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -53,7 +53,7 @@ Final
 WriterDashBoard -> //
 EditorDashBoard -> //
 Adding/Update Companies (Editor Only) (new component) ///
-Adding/Update users  (Editor Only) (new component)
+Adding/Update users  (Editor Only) (new component) ///
 >><<
 
 

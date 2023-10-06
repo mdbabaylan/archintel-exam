@@ -102,7 +102,7 @@ export default {
         status: "For Edit",
       };
 
-      fetch("http://localhost:3000/articles/" + this.article.id, {
+      fetch(process.env.VUE_APP_API_ENDPOINT + "/articles/" + this.article.id, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -136,7 +136,7 @@ export default {
         status: "Published",
       };
 
-      fetch("http://localhost:3000/articles/" + this.article.id, {
+      fetch(process.env.VUE_APP_API_ENDPOINT + "/articles/" + this.article.id, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

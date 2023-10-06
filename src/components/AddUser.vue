@@ -76,7 +76,7 @@ export default {
         status: "Active",
       };
 
-      fetch("http://localhost:3000/users", {
+      fetch(process.env.VUE_APP_API_ENDPOINT + "/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

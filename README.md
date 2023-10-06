@@ -22,5 +22,14 @@ username:editor1
 password:editor1
 
 
+
+for local use
+1) git clone /checkout this repo
+2) npm install
+3) create an .env file (if not present)
+
+and paste this code below
+VUE_APP_API_ENDPOINT=http://localhost:3000
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
