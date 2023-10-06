@@ -1,7 +1,7 @@
 <template>
   <div class="modal-overlay">
     <div class="modal-content">
-      <b-col md="11" class="mx-auto">
+      <b-col xs="12" sm="10" md="8" class="mx-auto">
         <b-form class="justify-content-center" @submit.prevent="onSubmit">
 
           <!-- Image Upload -->
@@ -157,7 +157,6 @@ export default {
   height: 100%;
   overflow-y: auto;
   background-color: rgba(0, 0, 0, 0.7);
-  /* 70% black opacity */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -166,11 +165,21 @@ export default {
 
 .modal-content {
   background-color: #fff;
-  padding: 20px;
+  padding: 10px;
+  /* Reduced padding */
   border-radius: 5px;
-  max-width: 500px;
   width: 90%;
+  max-width: 90%;
+  /* Adjusted max-width */
   z-index: 1001;
   position: relative;
+}
+
+/* Additional media query for very small devices */
+@media (max-width: 290px) {
+  .modal-content {
+    padding: 5px;
+    overflow-x: auto;
+  }
 }
 </style>
