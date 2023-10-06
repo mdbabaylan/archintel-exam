@@ -43,3 +43,6 @@ http://35.201.178.11:3000/users
 
 Thank you for the opportunity
 Have a good day!
+
+Live version
+http://mdbabaylan-archintel.surge.sh (http) (won't work with https as I haven't used an SSL for my GCP VM apis)
