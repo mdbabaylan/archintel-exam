@@ -20,12 +20,8 @@
       <template #head(writer_name)> Writer </template>
       <template #head(editor_name)> Editor </template>
       <template #cell(status)="data">
-        <b-button
-          variant="success"
-          v-if="data.item.status === 'For Edit'"
-          @click="handleButtonClick(data.item)"
-          >Edit</b-button
-        >
+        <b-button variant="success" v-if="data.item.status === 'For Edit'"
+          @click="handleButtonClick(data.item)">Edit</b-button>
         <td v-if="data.item.status !== 'For Edit'">{{ data.item.status }}</td>
       </template>
 
@@ -48,7 +44,7 @@
       <!-- Custom table header using the thead-top slot -->
       <template #thead-top>
         <tr>
-          <th colspan="10" class="text-center">Editor's Dashboard - Published)</th>
+          <th colspan="10" class="text-center">Editor's Dashboard - Published</th>
         </tr>
       </template>
       <!-- Custom column headers (optional) -->
@@ -112,14 +108,17 @@ export default {
 h3 {
   margin: 40px 0 0;
 }
+
 ul {
   list-style-type: none;
   padding: 0;
 }
+
 li {
   display: inline-block;
   margin: 0 10px;
 }
+
 a {
   color: #42b983;
 }

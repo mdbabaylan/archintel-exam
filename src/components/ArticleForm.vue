@@ -4,61 +4,35 @@
       <b-col md="11" class="mx-auto">
         <b-form class="justify-content-center" @submit.prevent="onSubmit">
           <!-- Related Company -->
-          <b-form-group
-            label="Related Company"
-            :state="!!form.company"
-            invalid-feedback="Company is required"
-          >
-            <b-form-select
-              v-model="form.company"
-              :options="companies"
-              required
-            ></b-form-select>
+          <b-form-group label="Related Company" :state="!!form.company" invalid-feedback="Company is required">
+            <b-form-select v-model="form.company" :options="companies" required></b-form-select>
           </b-form-group>
 
           <!-- Image Upload -->
-          <b-form-group
-            label="Image"
-            :state="!!form.image"
-            invalid-feedback="Image is required"
-          >
+          <b-form-group label="Image" :state="!!form.image" invalid-feedback="Image is required">
             <!-- Set image to "plain" to fix the double label showing (from browser + custom implementation) -->
-            <b-form-file v-model="form.image" plain required></b-form-file>
+            <p v-if="imageURL">Image URL: {{ imageURL }}</p>
+            <b-form-file v-model="form.image" plain required @change="handleFileUpload"></b-form-file>
           </b-form-group>
 
           <!-- Title -->
-          <b-form-group
-            label="Title"
-            :state="!!form.title"
-            invalid-feedback="Title is required"
-          >
+          <b-form-group label="Title" :state="!!form.title" invalid-feedback="Title is required">
             <b-form-input v-model="form.title" required></b-form-input>
           </b-form-group>
 
           <!-- Link -->
-          <b-form-group
-            label="Link"
-            :state="!!form.link && isValidURL(form.link)"
-            invalid-feedback="Valid URL is required"
-          >
+          <b-form-group label="Link" :state="!!form.link && isValidURL(form.link)"
+            invalid-feedback="Valid URL is required">
             <b-form-input v-model="form.link" required></b-form-input>
           </b-form-group>
 
           <!-- Date -->
-          <b-form-group
-            label="Date"
-            :state="!!form.date"
-            invalid-feedback="Date is required"
-          >
+          <b-form-group label="Date" :state="!!form.date" invalid-feedback="Date is required">
             <b-form-datepicker v-model="form.date" required></b-form-datepicker>
           </b-form-group>
 
           <!-- Content used Quill, thanks Sir Lester, so they call it WYSIWYG huh, swapped out form.content with content from Quill/v-model) -->
-          <b-form-group
-            label="Content"
-            :state="!!content"
-            invalid-feedback="Content is required"
-          >
+          <b-form-group label="Content" :state="!!content" invalid-feedback="Content is required">
             <!-- <b-form-textarea v-model="form.content" required></b-form-textarea> -->
             <!-- WYSIWYG editor instead of textarea-->
             <quill-editor v-model="content" required></quill-editor>
@@ -74,6 +48,8 @@
 
 <script>
 import { quillEditor } from "vue-quill-editor";
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { storage } from '@/services/firebaseConfig';
 
 export default {
   name: "ArticleForm",
@@ -98,6 +74,7 @@ export default {
       },
       companies: [], // Sample company options
       content: "", //quill code starterpack?
+      imageURL: null,
     };
   },
   methods: {
@@ -108,16 +85,15 @@ export default {
       //upload the image to firebase -> magically get the public url, and append that to the json server, not the blob
 
       const articleData = {
-        image:
-          "https://firebasestorage.googleapis.com/v0/b/archintel-imagestorage.appspot.com/o/122.PNG?alt=media&token=2c391603-ea74-477d-ad18-4241f2cced9a",
+        image: this.imageURL,
         title: this.form.title,
         link: this.form.link,
         date: this.form.date,
         content: this.content,
-        status: this.form.status,
         Writer: this.$store.state.user.firstname + " " + this.$store.state.user.lastname,
         Editor: "",
         company: this.form.company,
+        status: "For Edit",
       };
 
       fetch("http://localhost:3000/articles", {
@@ -144,6 +120,36 @@ export default {
         return false;
       }
     },
+    async handleFileUpload(event) {
+      const file = event.target.files[0];
+      if (file) {
+        try {
+          const storageRef = ref(storage, 'uploads/' + file.name);
+          const uploadTask = uploadBytesResumable(storageRef, file);
+
+          // Wait for the upload to complete
+          await new Promise((resolve, reject) => {
+            uploadTask.on('state_changed',
+              (snapshot) => {
+                // You can add progress tracking here if needed
+                console.log(snapshot);
+              },
+              (error) => {
+                reject(error);
+              },
+              () => {
+                resolve();
+              }
+            );
+          });
+
+          // Get the public URL of the uploaded file
+          this.imageURL = await getDownloadURL(storageRef);
+        } catch (error) {
+          console.error("Error uploading image:", error);
+        }
+      }
+    }
   },
 
   //get list of companies
@@ -162,6 +168,7 @@ export default {
       this.isLoading = false;
     }
   },
+
 };
 </script>
 <style scoped>
@@ -172,7 +179,8 @@ export default {
   width: 100%;
   height: 100%;
   overflow-y: auto;
-  background-color: rgba(0, 0, 0, 0.7); /* 70% black opacity */
+  background-color: rgba(0, 0, 0, 0.7);
+  /* 70% black opacity */
   display: flex;
   justify-content: center;
   align-items: center;

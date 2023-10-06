@@ -38,7 +38,7 @@ MockServer (use seperate project? worry about this later, VUE components first)
 >>Add/Update Companies (for editors only)
 
 >>Oct 6
-image uploading, edit + publishing articles
+image uploading (fireBaseconfig setup nitty gritty), then edit + publishing articles
 Adding Companies
 Adding users
 
