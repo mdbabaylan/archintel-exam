@@ -1,73 +1,80 @@
 <template>
-  <div class="table-responsive-sm table-responsive-md table-responsive-lg">
-    <!-- Display error message if there's an error -->
-    <div v-if="error">{{ error }}</div>
+  <div>
+    <EditArticleFormEditor v-if="isEditorVisible" :closeModal="toggleVisibility" :article="article" />
+    <div class="table-responsive-sm table-responsive-md table-responsive-lg">
+      <!-- Display error message if there's an error -->
+      <div v-if="error">{{ error }}</div>
 
-    <!-- Display loader while fetching data -->
-    <div v-if="isLoading">Loading...</div>
+      <!-- Display loader while fetching data -->
+      <div v-if="isLoading">Loading...</div>
 
-    <b-table v-else :items="for_edit_items">
-      <template #thead-top>
-        <tr>
-          <th colspan="10" class="text-center">Editor's Dashboard - For Publish</th>
-        </tr>
-      </template>
-      <!-- Custom column headers (optional) -->
-      <template #head(image)> Image </template>
-      <template #head(title)> Title </template>
-      <template #head(link)> Link </template>
-      <template #head(date)> Date </template>
-      <template #head(writer_name)> Writer </template>
-      <template #head(editor_name)> Editor </template>
-      <template #cell(status)="data">
-        <b-button variant="success" v-if="data.item.status === 'For Edit'"
-          @click="handleButtonClick(data.item)">Edit</b-button>
-        <td v-if="data.item.status !== 'For Edit'">{{ data.item.status }}</td>
-      </template>
+      <b-table v-else :items="for_edit_items">
+        <template #thead-top>
+          <tr>
+            <th colspan="10" class="text-center">Editor's Dashboard - For Publish</th>
+          </tr>
+        </template>
+        <!-- Custom column headers (optional) -->
+        <template #head(image)> Image </template>
+        <template #head(title)> Title </template>
+        <template #head(link)> Link </template>
+        <template #head(date)> Date </template>
+        <template #head(writer_name)> Writer </template>
+        <template #head(editor_name)> Editor </template>
+        <template #cell(status)="data">
+          <b-button variant="success" v-if="data.item.status === 'For Edit'"
+            @click="toggleVisibility(data.item)">Edit</b-button>
+          <td v-if="data.item.status !== 'For Edit'">{{ data.item.status }}</td>
+        </template>
 
-      <template #cell(image)="data">
-        <img :src="data.item.image" width="120" height="110" alt="Girl" />
-      </template>
-    </b-table>
+        <template #cell(image)="data">
+          <img :src="data.item.image" width="120" height="110" alt="Girl" />
+        </template>
+      </b-table>
 
-    <br />
-    <br />
-    <br />
+      <br />
+      <br />
+      <br />
 
-    <!-- Display error message if there's an error -->
-    <div v-if="error">{{ error }}</div>
+      <!-- Display error message if there's an error -->
+      <div v-if="error">{{ error }}</div>
 
-    <!-- Display loader while fetching data -->
-    <div v-if="isLoading">Loading...</div>
+      <!-- Display loader while fetching data -->
+      <div v-if="isLoading">Loading...</div>
 
-    <b-table v-else :items="for_publishing_items">
-      <!-- Custom table header using the thead-top slot -->
-      <template #thead-top>
-        <tr>
-          <th colspan="10" class="text-center">Editor's Dashboard - Published</th>
-        </tr>
-      </template>
-      <!-- Custom column headers (optional) -->
-      <!-- <template #cell(image)="">
+      <b-table v-else :items="for_publishing_items">
+        <!-- Custom table header using the thead-top slot -->
+        <template #thead-top>
+          <tr>
+            <th colspan="10" class="text-center">Editor's Dashboard - Published</th>
+          </tr>
+        </template>
+        <!-- Custom column headers (optional) -->
+        <!-- <template #cell(image)="">
         <img :src="data.items.image" width="120" height="110" alt="Girl" />
       </template> -->
-      <template #head(image)> Image </template>
-      <template #head(title)> Title </template>
-      <template #head(link)> Link </template>
-      <template #head(date)> Date </template>
-      <template #head(writer_name)> Writer </template>
-      <template #head(editor_name)> Editor </template>
+        <template #head(image)> Image </template>
+        <template #head(title)> Title </template>
+        <template #head(link)> Link </template>
+        <template #head(date)> Date </template>
+        <template #head(writer_name)> Writer </template>
+        <template #head(editor_name)> Editor </template>
 
-      <template #cell(image)="data">
-        <img :src="data.item.image" width="120" height="110" alt="Girl" />
-      </template>
-    </b-table>
+        <template #cell(image)="data">
+          <img :src="data.item.image" width="120" height="110" alt="Girl" />
+        </template>
+      </b-table>
+    </div>
   </div>
 </template>
 
 <script>
+import EditArticleFormEditor from "./EditArticleFormEditor.vue";
 export default {
   name: "EditorDashBoard",
+  components: {
+    EditArticleFormEditor
+  },
   props: {
     msg: String,
   },
@@ -78,7 +85,15 @@ export default {
       for_publishing_items: [],
       isLoading: false,
       error: null,
+      currentArticleId: null,
+      isEditorVisible: false,
     };
+  },
+  methods: {
+    toggleVisibility(articleObject) {
+      this.article = articleObject;
+      this.isEditorVisible = !this.isEditorVisible;
+    }
   },
   async mounted() {
     this.isLoading = true;

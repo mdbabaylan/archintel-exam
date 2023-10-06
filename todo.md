@@ -41,12 +41,12 @@ MockServer (use seperate project? worry about this later, VUE components first)
 image uploading (fireBaseconfig setup nitty gritty), then edit + publishing articles ///
 View Article ///
 Edit Article Writer/// 
+Edit Article Editor // 
+Publish Article Editor //
 
-Edit Article Editor
-
-All media (edit function, copy pasta from Dashboard)
-
-
+--Final 4 for Oct 6--
+All media Writer Edit
+All media editor edit
 Adding/Update Companies (Editor Only)
 Adding/Update users  (Editor Only)
 
