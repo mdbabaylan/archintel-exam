@@ -44,12 +44,18 @@ Edit Article Writer///
 Edit Article Editor // 
 Publish Article Editor //
 
---Final 4 for Oct 6--
-All media Writer Edit
-All media Editor edit
+--Final for Oct 6--
+All media Writer Edit //
+All media Editor edit //
 
-Adding/Update Companies (Editor Only)
-Adding/Update users  (Editor Only)
+>><<
+Final 
+WriterDashBoard -> copy the watch {} code in Allmedia to for re-render after adding/editing
+EditorDashBoard -> copy the watch {} code in Allmedia to for re-render after adding/editing
+Adding/Update Companies (Editor Only) (new component)
+Adding/Update users  (Editor Only) (new component)
+>><<
+
 
 >>October 7 12PM, clean up, do not rush and submit what you finished
 >>do not work on the missing things, time to clean up and clock in, deploy json-server to GCP VM, get it working
